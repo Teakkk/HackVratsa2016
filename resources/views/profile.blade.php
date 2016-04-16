@@ -9,8 +9,8 @@
 
                     <div class="panel-body">
                         @if(Auth::user()->type == 1)
-                            <p><a href="{{url('newjob')}}">Нова обява</a></p>
-                            <p><a href="#">Моите обяви</a></p>
+                            <p><a href="{{url('myjobs/create')}}">Нова обява</a></p>
+                            <p><a href="{{url('myjobs')}}">Моите обяви</a></p>
                             <p><a href="#">....</a></p>
                             <p><a href="#">...</a></p>
                             <p><a href="#">...</a></p>

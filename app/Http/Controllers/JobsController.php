@@ -22,7 +22,8 @@ class JobsController extends Controller
      */
     public function index()
     {
-        return view('myjobs');
+        $jobs = Job::where('user_id', Auth::user()->id)->orderBy('created_at')->get();
+        return view('myjobs', compact('jobs'));
     }
 
     /**
@@ -59,7 +60,7 @@ class JobsController extends Controller
         foreach ($clevels as $clevels) {
             $clevelsArr[$clevels->id] = $clevels->value;
         }
-        return view('newjob', ['categories' => $categoriesArr, 'jobtypes' => $jobtypesArr, 'jobterms' => $jobtermsArr, 'clevels' => $clevelsArr]);
+        return view('myjobs/create', ['categories' => $categoriesArr, 'jobtypes' => $jobtypesArr, 'jobterms' => $jobtermsArr, 'clevels' => $clevelsArr]);
     }
 
     /**
@@ -78,10 +79,10 @@ class JobsController extends Controller
             $job->user_id = Auth::user()->id;
             $job->title = $request->title;
             $job->description = $request->description;
-            $job->cat_id = $request->category;
-            $job->jobtype_id = $request->jobtype;
-            $job->jobterm_id = $request->jobterm;
-            $job->clevel_id = $request->clevel;
+            $job->cat_id = $request->cat_id;
+            $job->jobtype_id = $request->jobtype_id;
+            $job->jobterm_id = $request->jobterm_id;
+            $job->clevel_id = $request->clevel_id;
             $job->salary_from = $request->salary_from;
             $job->salary_to = $request->salary_to;
             $job->firm_name = $request->firm_name;
@@ -92,7 +93,7 @@ class JobsController extends Controller
 
             // Лого
             if (Input::file()) {
-                $file = array_get($input,'logo');
+                $file = array_get($input, 'logo');
                 // SET UPLOAD PATH
                 $destinationPath = 'logos';
                 // GET THE FILE EXTENSION
@@ -103,7 +104,7 @@ class JobsController extends Controller
                 $upload_success = $file->move($destinationPath, $fileName);
 
                 // добавяне на лого към базата данни
-                $job->logo = 'logos/'.$fileName;
+                $job->logo = 'logos/' . $fileName;
             }
 
             $job->save();
@@ -112,7 +113,7 @@ class JobsController extends Controller
             return redirect('myjobs');
         }
 
-        return redirect('newjob')
+        return redirect('myjobs/create')
             ->withErrors($validation)
             ->withInput();
     }
@@ -136,7 +137,35 @@ class JobsController extends Controller
      */
     public function edit($id)
     {
-        //
+        // categories
+        $categories = Category::all();
+        $categoriesArr = array(0 => '... Изберете категория ...');
+        foreach ($categories as $category) {
+            $categoriesArr[$category->id] = $category->value;
+        }
+
+        // jobtypes
+        $jobtypes = DB::table('job_types')->get();
+        $jobtypesArr = array(0 => '... Изберете вид на заетост ...');
+        foreach ($jobtypes as $jobtype) {
+            $jobtypesArr[$jobtype->id] = $jobtype->value;
+        }
+
+        // jobterms
+        $jobterms = DB::table('job_terms')->get();
+        $jobtermsArr = array(0 => '... Изберете срок на заетост ...');
+        foreach ($jobterms as $jobterm) {
+            $jobtermsArr[$jobterm->id] = $jobterm->value;
+        }
+
+        // carreer levels
+        $clevels = DB::table('clevels')->get();
+        $clevelsArr = array(0 => '... Изберете ниво в йерархията ...');
+        foreach ($clevels as $clevels) {
+            $clevelsArr[$clevels->id] = $clevels->value;
+        }
+        $job = Job::findOrFail($id);
+        return view('myjobs.edit', compact('job'), ['categories' => $categoriesArr, 'jobtypes' => $jobtypesArr, 'jobterms' => $jobtermsArr, 'clevels' => $clevelsArr]);
     }
 
     /**
@@ -148,7 +177,51 @@ class JobsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = Input::all();
+        $validation = Validator::make($input, Job::$rules);
+
+        if ($validation->passes()) {
+            $job =  Job::find($id);
+            $job->user_id = Auth::user()->id;
+            $job->title = $request->title;
+            $job->description = $request->description;
+            $job->cat_id = $request->cat_id;
+            $job->jobtype_id = $request->jobtype_id;
+            $job->jobterm_id = $request->jobterm_id;
+            $job->clevel_id = $request->clevel_id;
+            $job->salary_from = $request->salary_from;
+            $job->salary_to = $request->salary_to;
+            $job->firm_name = $request->firm_name;
+            $job->contact_name = $request->contact_name;
+            $job->phone = $request->phone;
+            $job->email = $request->email;
+            $job->address = $request->address;
+
+            // Лого
+            if (Input::file()) {
+                $file = array_get($input, 'logo');
+                // SET UPLOAD PATH
+                $destinationPath = 'logos';
+                // GET THE FILE EXTENSION
+                $extension = $file->getClientOriginalExtension();
+                // RENAME THE UPLOAD WITH RANDOM NUMBER
+                $fileName = rand(11111, 99999) . '.' . $extension;
+                // MOVE THE UPLOADED FILES TO THE DESTINATION DIRECTORY
+                $upload_success = $file->move($destinationPath, $fileName);
+
+                // добавяне на лого към базата данни
+                $job->logo = 'logos/' . $fileName;
+            }
+
+            $job->save();
+
+            $request->session()->flash('alert-success', 'Успешно е редактирана обявата!');
+            return redirect('myjobs');
+        }
+
+        return redirect('myjobs/'.$id.'/edit')
+            ->withErrors($validation)
+            ->withInput();
     }
 
     /**

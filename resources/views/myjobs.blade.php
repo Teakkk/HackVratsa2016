@@ -9,7 +9,47 @@
                     <div class="panel-heading">My jobs</div>
 
                     <div class="panel-body">
-                        dsadsa
+                        @if($jobs->count())
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover"
+                                       id="dataTables-example">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Заглавие</th>
+                                        <th>Кандидати</th>
+                                        <th>Преглеждания</th>
+                                        <th>Публикувана на</th>
+                                        <th>Опции</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    $i = 1;
+                                    ?>
+                                    @foreach ($jobs as $job)
+                                        <tr>
+                                            <td>{{ $i }}</td>
+                                            <td>{{ $job->title }}</td>
+                                            <td><a href="#">0 кандидата</a></td>
+                                            <td>{{ $job->visits }}</td>
+                                            <td>{{ $job->created_at }}</td>
+                                            <td>
+                                                <a href="#"><i class="fa fa-globe"></i></a>&nbsp;
+                                                <a href="#"><i class="fa fa-pencil"></i></a>&nbsp;
+                                                <a href="#"><i class="fa fa-times"></i></a>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                        $i++;
+                                        ?>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @else
+                            <div class="alert alert-info">Няма публикувани обяви!</div>
+                        @endif
                     </div>
                 </div>
             </div>
