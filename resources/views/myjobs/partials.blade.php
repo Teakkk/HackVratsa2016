@@ -24,11 +24,11 @@
     {!! Form::select('clevel_id', $clevels, null, ['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('salary_from','Заплата от') !!}
+    {!! Form::label('salary_from','Заплата от (лв.)') !!}
     {!! Form::text('salary_from', null, ['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('salary_to','Заплата до') !!}
+    {!! Form::label('salary_to','Заплата до (лв.)') !!}
     {!! Form::text('salary_to', null, ['class'=>'form-control']) !!}
 </div>
 <h3>Данни за контакт</h3>
