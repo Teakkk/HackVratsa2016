@@ -1,20 +1,15 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// Нач. страница
+Route::get('/', 'PagesController@homepage');
+// Вход, регистрация и т.н.
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+// Ако е влязал потребителя!
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('profile', 'PagesController@profile');
+    Route::get('newjob', 'JobsController@create');
+    Route::post('newjob', 'JobsController@store');
+    Route::get('myjobs', 'JobsController@index');
+});
+
+

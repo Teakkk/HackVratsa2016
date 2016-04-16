@@ -19,7 +19,7 @@ return [
     'array'                => 'Полето :attribute трябва да бъде масив.',
     'before'               => 'Полето :attribute трябва да бъде дата преди :date.',
     'between'              => [
-        'numeric' => 'Полето :attribute трябва да бъде между :min и :max.',
+        'numeric' => 'Полето :attribute трябва да бъде между :min и :max',
         'file'    => 'Полето :attribute трябва да бъде между :min и :max килобайта.',
         'string'  => 'Полето :attribute трябва да бъде между :min и :max знака.',
         'array'   => 'Полето :attribute трябва да има между :min - :max елемента.',
@@ -76,6 +76,7 @@ return [
     'timezone'             => 'Полето :attribute трябва да съдържа валидна часова зона.',
     'unique'               => 'Полето :attribute вече съществува.',
     'url'                  => 'Полето :attribute е в невалиден формат.',
+    'morezero'                  => 'Моля изберете :attribute',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -133,5 +134,11 @@ return [
         'recaptcha_response_field' => 'Рекапча',
         'subject'                  => 'Заглавие',
         'message'                  => 'Съобщение',
+        'category'                  => 'Категория',
+        'jobtype'                  => 'Вид на заетост',
+        'jobterm'                  => 'Срок на заетост',
+        'clevel'                  => 'Ниво в йерархията',
+        'contact_name'                  => 'Лице за контакт',
+        'firm_name'                  => 'Фирма',
     ],
 ];
