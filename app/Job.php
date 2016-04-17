@@ -8,14 +8,13 @@ class Job extends Model
 {
     public static $rules = [
         'title' => 'required',
-        'category' => 'required|morezero',
+        'cat_id' => 'required|morezero',
         'description' => 'required|min:20',
-        'jobtype' => 'required|morezero',
-        'jobterm' => 'required|morezero',
-        'clevel' => 'required|morezero',
+        'jobtype_id' => 'required|morezero',
+        'jobterm_id' => 'required|morezero',
+        'clevel_id' => 'required|morezero',
         'contact_name' => 'required',
         'phone' => 'required',
-        'email' => 'required',
-        'logo' => 'mimes:jpeg,png,gif,jpg,JPG'
+        'email' => 'required|email'
     ];
 }

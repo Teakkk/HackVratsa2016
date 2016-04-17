@@ -29,13 +29,13 @@
                                     <tr>
                                         <td>{{ $i }}</td>
                                         <td>{{ $job->title }}</td>
-                                        <td><a href="#">0 кандидата</a></td>
+                                        <td><a href="{{url('jcandidates/'.$job->id)}}">Виж кандидатите</a></td>
                                         <td>{{ $job->visits }}</td>
                                         <td>{{ $job->created_at }}</td>
                                         <td>
-                                            <a href="#"><i class="fa fa-globe"></i></a>&nbsp;
+                                            <a href="{{url('job/'.$job->id)}}" target="_blank"><i class="fa fa-globe"></i></a>&nbsp;
                                             <a href="{{url('myjobs/'.$job->id.'/edit')}}"><i class="fa fa-pencil"></i></a>&nbsp;
-                                            <a href="#"><i class="fa fa-times"></i></a>
+                                            <a href="{{url('myjobs/'.$job->id.'/delete')}}"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     <?php

@@ -50,14 +50,14 @@
                     <tbody>
                     @foreach($lastjobs as $lastjob)
                     <tr>
-                        <td><a href="#">{{$lastjob->title}}</a></td>
+                        <td><a href="{{url('job/'.$lastjob->id)}}">{{$lastjob->title}}</a></td>
                         <td><a href="#">{{$lastjob->value}}</a></td>
                         <td>{{$lastjob->created_at}}</td>
                     </tr>
                     @endforeach
                     </tbody>
                 </table>
-                <div class="text-center"><a href="#" role="button" class="btn btn-default">Виж всички</a></div>
+                <div class="text-center"><a href="{{url('jobs')}}" role="button" class="btn btn-default">Виж всички</a></div>
             </div>
             <div class="clearfix"></div>
         </div>

@@ -43,7 +43,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div id="bs-example-navbar-collapse-1" style="height: 1px;" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{url('/')}}">Начало</a></li>
-                <li><a href="#">Обяви</a></li>
+                <li><a href="{{url('jobs')}}">Обяви</a></li>
                 @if (Auth::guest())
                     <li><a href="{{url('login')}}">Вход</a></li>
                     <li><a href="{{url('register')}}">Регистрация</a></li>
@@ -51,8 +51,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <li><a href="{{ url('profile') }}">Профил</a></li>
                     <li><a href="{{ url('logout') }}">Изход</a></li>
                 @endif
-                <li><a href="#">ЧЗВ</a></li>
-                <li><a href="#">Контакти</a></li>
+                <li><a href="{{url('faq')}}">ЧЗВ</a></li>
+                <li><a href="{{url('contacts')}}">Контакти</a></li>
             </ul>
         </div>
         <div class="clearfix"></div>

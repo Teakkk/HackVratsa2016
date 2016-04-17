@@ -60,12 +60,12 @@
                                 </div>
                             </a></article>
                     @else
-                        <article class="col-md-4 col-xs-6"><a href="#">
+                        <article class="col-md-4 col-xs-6"><a href="{{url('mycvs')}}">
                                 <div class="content-wrapper panel panel-default">
                                     <div class="panel-heading"><span aria-hidden="true" class="fa fa-edit fa-2x"></span>
-                                        <h2 class="panel-title">CV-та </h2>
+                                        <h2 class="panel-title">CV</h2>
                                     </div>
-                                    <div class="panel-body">Моите CV-та</div>
+                                    <div class="panel-body">Вашето CV</div>
                                 </div>
                             </a></article>
                         <article class="col-md-4 col-xs-6"><a href="#">

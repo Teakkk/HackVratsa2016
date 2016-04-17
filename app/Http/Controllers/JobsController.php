@@ -230,8 +230,10 @@ class JobsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        Job::destroy($id);
+        $request->session()->flash('alert-success', 'Успешно е изтрита обявата!');
+        return redirect('myjobs');
     }
 }
